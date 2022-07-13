@@ -22,3 +22,28 @@ func (s UserService) GetAllUsers() []models.UserOut {
 	}
 	return result
 }
+
+func (s UserService) CreateUser(userIn models.UserIn) *models.UserOut {
+	var user models.User = models.User{Username: userIn.Username, Password: userIn.Password}
+
+	createdUser := s.UserDao.CreateUser(&user)
+	return &models.UserOut{ID: createdUser.ID, Username: createdUser.Username}
+}
+
+func (s UserService) GetUserById(id uint) (*models.UserOut, error) {
+	user, err := s.UserDao.GetById(id)
+	if err != nil {
+		return nil, err
+	}
+	userOut := models.UserOut{ID: user.ID, Username: user.Username}
+	return &userOut, nil
+}
+
+func (s UserService) DeleteUserById(id uint) error {
+	user, err := s.UserDao.GetById(id)
+	if err != nil {
+		return err
+	}
+
+	return s.UserDao.DeleteUser(user)
+}
