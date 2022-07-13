@@ -25,3 +25,17 @@ func (d UserDao) CreateUser(user *models.User) *models.User {
 	d.Db.Create(user)
 	return user
 }
+
+func (d UserDao) GetById(id uint) (*models.User, error) {
+	var user models.User
+
+	if err := d.Db.First(&user, id).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
+func (d UserDao) DeleteUser(user *models.User) error {
+	return d.Db.Delete(user).Error
+
+}
