@@ -32,7 +32,14 @@ func (c UserController) CreateUser(context *gin.Context) {
 		return
 	}
 
-	userOut := c.UserService.CreateUser(userIn)
+	userOut, err := c.UserService.CreateUser(userIn)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
 	context.JSON(http.StatusOK, userOut)
 	return
 }

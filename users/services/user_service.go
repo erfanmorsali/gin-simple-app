@@ -16,19 +16,25 @@ func NewUserService(userDao interfaces.UserDao) *UserService {
 
 func (s UserService) GetAllUsers() []dtos.UserOut {
 	var result []dtos.UserOut
+
 	users := s.UserDao.GetAll()
 	for _, user := range users {
 		userOut := dtos.CreateUserOut(user)
 		result = append(result, userOut)
 	}
+
 	return result
 }
 
-func (s UserService) CreateUser(userIn dtos.UserIn) *dtos.UserOut {
+func (s UserService) CreateUser(userIn dtos.UserIn) (*dtos.UserOut, error) {
 	var user = models.User{Username: userIn.Username, Password: userIn.Password}
 
-	createdUser := s.UserDao.CreateUser(&user)
-	return &dtos.UserOut{ID: createdUser.ID, Username: createdUser.Username}
+	createdUser, err := s.UserDao.CreateUser(&user)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dtos.UserOut{ID: createdUser.ID, Username: createdUser.Username}, nil
 }
 
 func (s UserService) GetUserById(id uint) (*dtos.UserOut, error) {
@@ -37,6 +43,7 @@ func (s UserService) GetUserById(id uint) (*dtos.UserOut, error) {
 		return nil, err
 	}
 	userOut := dtos.CreateUserOut(*user)
+
 	return &userOut, nil
 }
 

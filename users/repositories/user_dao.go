@@ -21,9 +21,11 @@ func (d UserDao) GetAll() []models.User {
 	return users
 }
 
-func (d UserDao) CreateUser(user *models.User) *models.User {
-	d.Db.Create(user)
-	return user
+func (d UserDao) CreateUser(user *models.User) (*models.User, error) {
+	if err := d.Db.Create(user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
 }
 
 func (d UserDao) GetById(id uint) (*models.User, error) {
