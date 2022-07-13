@@ -16,4 +16,7 @@ func RunUsersApi(engine *gin.Engine, db *gorm.DB) {
 	usersGroup := engine.Group("/users")
 
 	usersGroup.GET("/", controller.GetAllUsers)
+	usersGroup.GET("/:id", controller.GetUserById)
+	usersGroup.POST("/", controller.CreateUser)
+	usersGroup.DELETE("/:id", controller.DeleteUserById)
 }
