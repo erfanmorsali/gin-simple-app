@@ -1,6 +1,6 @@
-package models
+package dtos
 
-type UserOut struct {
+type UserInfo struct {
 	ID       uint   `json:"id"`
 	Username string `json:"username"`
 }
