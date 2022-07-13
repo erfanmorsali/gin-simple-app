@@ -1,6 +1,8 @@
 package interfaces
 
-import "github.com/erfanmorsali/gin-simple-app.git/users/models"
+import (
+	"github.com/erfanmorsali/gin-simple-app.git/database/models"
+)
 
 type UserDao interface {
 	GetAll() []models.User

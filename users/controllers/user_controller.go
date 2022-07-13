@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"github.com/erfanmorsali/gin-simple-app.git/users/dtos"
 	"github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
-	"github.com/erfanmorsali/gin-simple-app.git/users/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -22,7 +22,7 @@ func (c UserController) GetAllUsers(context *gin.Context) {
 }
 
 func (c UserController) CreateUser(context *gin.Context) {
-	var userIn models.UserIn
+	var userIn dtos.UserIn
 
 	err := context.ShouldBindJSON(&userIn)
 	if err != nil {

@@ -1,10 +1,10 @@
 package interfaces
 
-import "github.com/erfanmorsali/gin-simple-app.git/users/models"
+import "github.com/erfanmorsali/gin-simple-app.git/users/dtos"
 
 type UserService interface {
-	GetAllUsers() []models.UserOut
-	CreateUser(userIn models.UserIn) *models.UserOut
-	GetUserById(id uint) (*models.UserOut, error)
+	GetAllUsers() []dtos.UserOut
+	CreateUser(userIn dtos.UserIn) *dtos.UserOut
+	GetUserById(id uint) (*dtos.UserOut, error)
 	DeleteUserById(id uint) error
 }
