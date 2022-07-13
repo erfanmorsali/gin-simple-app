@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    container_name: database
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=erfan
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - gin-simple-app-volume:/var/lib/postgresql/data
+
+volumes:
+  gin-simple-app-volume:
+    external: false
