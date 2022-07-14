@@ -9,9 +9,9 @@ import (
 )
 
 func RunUsersApi(engine *gin.Engine, db *gorm.DB) {
-	dao := repositories.UserDao{Db: db}
-	service := services.UserService{UserDao: dao}
-	controller := controllers.UserController{UserService: service}
+	dao := repositories.NewUserDao(db)
+	service := services.NewUserService(dao)
+	controller := controllers.NewUserController(service)
 
 	usersGroup := engine.Group("/users")
 

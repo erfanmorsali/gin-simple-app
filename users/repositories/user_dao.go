@@ -9,7 +9,7 @@ type UserDao struct {
 	Db *gorm.DB
 }
 
-func newUserDao(db *gorm.DB) *UserDao {
+func NewUserDao(db *gorm.DB) *UserDao {
 	return &UserDao{Db: db}
 }
 
@@ -34,6 +34,7 @@ func (d UserDao) GetById(id uint) (*models.User, error) {
 	if err := d.Db.Preload("Posts").First(&user, id).Error; err != nil {
 		return nil, err
 	}
+
 	return &user, nil
 }
 

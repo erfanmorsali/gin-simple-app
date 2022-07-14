@@ -7,21 +7,15 @@ import (
 type UserOut struct {
 	ID       uint   `json:"id"`
 	Username string `json:"username"`
-	Posts    []PostInfo
-}
-
-type PostInfo struct {
-	ID          uint   `json:"id"`
-	Title       string `json:"title"`
-	Description string `json:"description"`
+	Posts    []postInfo
 }
 
 func CreateUserOut(user models.User) UserOut {
-	var postInfos []PostInfo
+	var postInfos []postInfo
 
 	if len(user.Posts) >= 1 {
 		for _, post := range user.Posts {
-			postInfo := PostInfo{ID: post.ID, Title: post.Title, Description: post.Description}
+			postInfo := postInfo{ID: post.ID, Title: post.Title, Description: post.Description}
 			postInfos = append(postInfos, postInfo)
 		}
 	}
