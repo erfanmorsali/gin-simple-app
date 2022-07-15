@@ -21,7 +21,7 @@ func (d UserDao) GetAll() []models.User {
 	return users
 }
 
-func (d UserDao) CreateUser(user *models.User) (*models.User, error) {
+func (d UserDao) Create(user *models.User) (*models.User, error) {
 	if err := d.Db.Create(user).Error; err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (d UserDao) GetById(id uint) (*models.User, error) {
 	return &user, nil
 }
 
-func (d UserDao) DeleteUser(user *models.User) error {
+func (d UserDao) Delete(user *models.User) error {
 	return d.Db.Delete(user).Error
 
 }

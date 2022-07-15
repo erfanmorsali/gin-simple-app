@@ -33,7 +33,7 @@ func (d PostDao) GetById(id uint) (*models.Post, error) {
 	return &post, nil
 }
 
-func (d PostDao) CreatePost(post models.Post) (*models.Post, error) {
+func (d PostDao) Create(post models.Post) (*models.Post, error) {
 	if err := d.Db.Create(&post).Error; err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func (d PostDao) CreatePost(post models.Post) (*models.Post, error) {
 	return &post, nil
 }
 
-func (d PostDao) DeletePost(post models.Post) error {
+func (d PostDao) Delete(post models.Post) error {
 	if err := d.Db.Delete(&post).Error; err != nil {
 		return err
 	}

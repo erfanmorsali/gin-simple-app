@@ -17,7 +17,7 @@ func NewPostService(dao interfaces.PostDao, userDao userInterfaces.UserDao, cate
 	return &PostService{PostDao: dao, UserDao: userDao, CategoryDao: categoryDao}
 }
 
-func (p PostService) GetAllPosts() ([]dtos.PostOut, error) {
+func (p PostService) GetAll() ([]dtos.PostOut, error) {
 	var result []dtos.PostOut
 
 	posts, err := p.PostDao.GetAll()
@@ -33,7 +33,7 @@ func (p PostService) GetAllPosts() ([]dtos.PostOut, error) {
 	return result, nil
 }
 
-func (p PostService) GetPostById(id uint) (*dtos.PostOut, error) {
+func (p PostService) GetById(id uint) (*dtos.PostOut, error) {
 	post, err := p.PostDao.GetById(id)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (p PostService) GetPostById(id uint) (*dtos.PostOut, error) {
 
 }
 
-func (p PostService) CreatePost(postIn dtos.PostIn) (*dtos.PostOut, error) {
+func (p PostService) Create(postIn dtos.PostIn) (*dtos.PostOut, error) {
 	user, err := p.UserDao.GetById(postIn.UserID)
 	if err != nil {
 		return nil, err
@@ -52,14 +52,14 @@ func (p PostService) CreatePost(postIn dtos.PostIn) (*dtos.PostOut, error) {
 
 	var categories []models.Category
 	if postIn.CategoryIDS != nil && len(postIn.CategoryIDS) >= 1 {
-		categories, err = p.CategoryDao.GetCategoriesByIds(postIn.CategoryIDS)
+		categories, err = p.CategoryDao.GetByIds(postIn.CategoryIDS)
 		if err != nil {
 			return nil, err
 		}
 	}
 
 	post := models.Post{User: *user, Title: postIn.Title, Description: postIn.Description, Categories: categories}
-	createdPost, err := p.PostDao.CreatePost(post)
+	createdPost, err := p.PostDao.Create(post)
 	if err != nil {
 		return nil, err
 	}
@@ -68,13 +68,13 @@ func (p PostService) CreatePost(postIn dtos.PostIn) (*dtos.PostOut, error) {
 	return &postOut, nil
 }
 
-func (p PostService) DeletePostById(id uint) error {
+func (p PostService) DeleteById(id uint) error {
 	post, err := p.PostDao.GetById(id)
 	if err != nil {
 		return err
 	}
 
-	err = p.PostDao.DeletePost(*post)
+	err = p.PostDao.Delete(*post)
 	if err != nil {
 		return err
 	}

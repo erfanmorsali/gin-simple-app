@@ -14,7 +14,7 @@ func NewUserService(userDao interfaces.UserDao) *UserService {
 	return &UserService{UserDao: userDao}
 }
 
-func (s UserService) GetAllUsers() []dtos.UserOut {
+func (s UserService) GetAll() []dtos.UserOut {
 	var result []dtos.UserOut
 
 	users := s.UserDao.GetAll()
@@ -26,10 +26,10 @@ func (s UserService) GetAllUsers() []dtos.UserOut {
 	return result
 }
 
-func (s UserService) CreateUser(userIn dtos.UserIn) (*dtos.UserOut, error) {
+func (s UserService) Create(userIn dtos.UserIn) (*dtos.UserOut, error) {
 	var user = models.User{Username: userIn.Username, Password: userIn.Password}
 
-	createdUser, err := s.UserDao.CreateUser(&user)
+	createdUser, err := s.UserDao.Create(&user)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func (s UserService) CreateUser(userIn dtos.UserIn) (*dtos.UserOut, error) {
 	return &dtos.UserOut{ID: createdUser.ID, Username: createdUser.Username}, nil
 }
 
-func (s UserService) GetUserById(id uint) (*dtos.UserOut, error) {
+func (s UserService) GetById(id uint) (*dtos.UserOut, error) {
 	user, err := s.UserDao.GetById(id)
 	if err != nil {
 		return nil, err
@@ -47,11 +47,11 @@ func (s UserService) GetUserById(id uint) (*dtos.UserOut, error) {
 	return &userOut, nil
 }
 
-func (s UserService) DeleteUserById(id uint) error {
+func (s UserService) DeleteById(id uint) error {
 	user, err := s.UserDao.GetById(id)
 	if err != nil {
 		return err
 	}
 
-	return s.UserDao.DeleteUser(user)
+	return s.UserDao.Delete(user)
 }

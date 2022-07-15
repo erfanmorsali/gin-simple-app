@@ -11,6 +11,8 @@ services:
       - POSTGRES_PASSWORD=123456
     volumes:
       - gin-simple-app-volume:/var/lib/postgresql/data
+    restart: on-failure
+
 
 volumes:
   gin-simple-app-volume:

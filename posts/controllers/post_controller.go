@@ -17,7 +17,7 @@ func NewPostController(service interfaces.PostService) *PostController {
 }
 
 func (c PostController) GetAllPosts(context *gin.Context) {
-	posts, err := c.PostService.GetAllPosts()
+	posts, err := c.PostService.GetAll()
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -39,7 +39,7 @@ func (c PostController) GetPostById(context *gin.Context) {
 		return
 	}
 
-	postOut, err := c.PostService.GetPostById(uint(id))
+	postOut, err := c.PostService.GetById(uint(id))
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -61,7 +61,7 @@ func (c PostController) CreatePost(context *gin.Context) {
 		return
 	}
 
-	post, err := c.PostService.CreatePost(postIn)
+	post, err := c.PostService.Create(postIn)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -83,7 +83,7 @@ func (c PostController) DeletePostById(context *gin.Context) {
 		return
 	}
 
-	err = c.PostService.DeletePostById(uint(id))
+	err = c.PostService.DeleteById(uint(id))
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),

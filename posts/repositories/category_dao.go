@@ -13,7 +13,7 @@ func NewCategoryDao(db *gorm.DB) *CategoryDao {
 	return &CategoryDao{Db: db}
 }
 
-func (d CategoryDao) GetCategoriesByIds(ids []uint) ([]models.Category, error) {
+func (d CategoryDao) GetByIds(ids []uint) ([]models.Category, error) {
 	var categories []models.Category
 
 	if err := d.Db.Find(&categories, "id in (?)", ids).Error; err != nil {
@@ -21,4 +21,8 @@ func (d CategoryDao) GetCategoriesByIds(ids []uint) ([]models.Category, error) {
 	}
 
 	return categories, nil
+}
+
+func (d CategoryDao) GetById() {
+
 }

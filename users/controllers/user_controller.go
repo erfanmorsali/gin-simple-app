@@ -17,7 +17,7 @@ func NewUserController(userService interfaces.UserService) *UserController {
 }
 
 func (c UserController) GetAllUsers(context *gin.Context) {
-	context.JSON(http.StatusOK, c.UserService.GetAllUsers())
+	context.JSON(http.StatusOK, c.UserService.GetAll())
 	return
 }
 
@@ -32,7 +32,7 @@ func (c UserController) CreateUser(context *gin.Context) {
 		return
 	}
 
-	userOut, err := c.UserService.CreateUser(userIn)
+	userOut, err := c.UserService.Create(userIn)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -54,7 +54,7 @@ func (c UserController) GetUserById(context *gin.Context) {
 		return
 	}
 
-	userOut, err := c.UserService.GetUserById(uint(id))
+	userOut, err := c.UserService.GetById(uint(id))
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -76,7 +76,7 @@ func (c UserController) DeleteUserById(context *gin.Context) {
 		return
 	}
 
-	err = c.UserService.DeleteUserById(uint(id))
+	err = c.UserService.DeleteById(uint(id))
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
