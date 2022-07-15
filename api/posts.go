@@ -10,14 +10,14 @@ import (
 	"gorm.io/gorm"
 )
 
-func RunPostsApi(engine *gin.Engine, db *gorm.DB) {
+func RunPostsApi(routerGroup *gin.RouterGroup, db *gorm.DB) {
 	dao := repositories.NewPostDao(db)
 	userDao := userRepositories.NewUserDao(db)
 	categoryDao := repositories.NewCategoryDao(db)
 	service := services.NewPostService(dao, userDao, categoryDao)
 	controller := controllers.NewPostController(service)
 
-	postGroup := engine.Group("/posts")
+	postGroup := routerGroup.Group("/posts")
 
 	postGroup.GET("/", controller.GetAllPosts)
 	postGroup.GET("/:id", controller.GetPostById)

@@ -4,11 +4,15 @@ create table users
         constraint users_pk
             primary key,
     username varchar(50)  not null,
-    password varchar(100) not null
+    password varchar(100) not null,
+    email    varchar(100) not null
 );
 
 create unique index users_username_uindex
     on users (username);
+
+create unique index users_email_uindex
+    on users (email);
 
 
 create table posts

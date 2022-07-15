@@ -7,17 +7,17 @@ import (
 )
 
 type UserService struct {
-	UserDao interfaces.UserDao
+	userDao interfaces.UserDao
 }
 
 func NewUserService(userDao interfaces.UserDao) *UserService {
-	return &UserService{UserDao: userDao}
+	return &UserService{userDao: userDao}
 }
 
 func (s UserService) GetAll() []dtos.UserOut {
 	var result []dtos.UserOut
 
-	users := s.UserDao.GetAll()
+	users := s.userDao.GetAll()
 	for _, user := range users {
 		userOut := dtos.CreateUserOut(user)
 		result = append(result, userOut)
@@ -29,7 +29,7 @@ func (s UserService) GetAll() []dtos.UserOut {
 func (s UserService) Create(userIn dtos.UserIn) (*dtos.UserOut, error) {
 	var user = models.User{Username: userIn.Username, Password: userIn.Password}
 
-	createdUser, err := s.UserDao.Create(&user)
+	createdUser, err := s.userDao.Create(&user)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (s UserService) Create(userIn dtos.UserIn) (*dtos.UserOut, error) {
 }
 
 func (s UserService) GetById(id uint) (*dtos.UserOut, error) {
-	user, err := s.UserDao.GetById(id)
+	user, err := s.userDao.GetById(id)
 	if err != nil {
 		return nil, err
 	}
@@ -48,10 +48,10 @@ func (s UserService) GetById(id uint) (*dtos.UserOut, error) {
 }
 
 func (s UserService) DeleteById(id uint) error {
-	user, err := s.UserDao.GetById(id)
+	user, err := s.userDao.GetById(id)
 	if err != nil {
 		return err
 	}
 
-	return s.UserDao.Delete(user)
+	return s.userDao.Delete(user)
 }

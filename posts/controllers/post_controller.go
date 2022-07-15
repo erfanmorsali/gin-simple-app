@@ -9,15 +9,15 @@ import (
 )
 
 type PostController struct {
-	PostService interfaces.PostService
+	postService interfaces.PostService
 }
 
 func NewPostController(service interfaces.PostService) *PostController {
-	return &PostController{PostService: service}
+	return &PostController{postService: service}
 }
 
 func (c PostController) GetAllPosts(context *gin.Context) {
-	posts, err := c.PostService.GetAll()
+	posts, err := c.postService.GetAll()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Internal Server Error",
@@ -39,7 +39,7 @@ func (c PostController) GetPostById(context *gin.Context) {
 		return
 	}
 
-	postOut, err := c.PostService.GetById(uint(id))
+	postOut, err := c.postService.GetById(uint(id))
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -61,7 +61,7 @@ func (c PostController) CreatePost(context *gin.Context) {
 		return
 	}
 
-	post, err := c.PostService.Create(postIn)
+	post, err := c.postService.Create(postIn)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -83,7 +83,7 @@ func (c PostController) DeletePostById(context *gin.Context) {
 		return
 	}
 
-	err = c.PostService.DeleteById(uint(id))
+	err = c.postService.DeleteById(uint(id))
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),

@@ -7,15 +7,15 @@ import (
 )
 
 type CategoryService struct {
-	CategoryDao interfaces.CategoryDao
+	categoryDao interfaces.CategoryDao
 }
 
 func NewCategoryService(categoryDao interfaces.CategoryDao) *CategoryService {
-	return &CategoryService{CategoryDao: categoryDao}
+	return &CategoryService{categoryDao: categoryDao}
 }
 
 func (s CategoryService) GetAll() ([]dtos.CategoryOut, error) {
-	categories, err := s.CategoryDao.GetAll()
+	categories, err := s.categoryDao.GetAll()
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func (s CategoryService) GetAll() ([]dtos.CategoryOut, error) {
 }
 
 func (s CategoryService) GetById(id uint) (*dtos.CategoryOut, error) {
-	category, err := s.CategoryDao.GetById(id)
+	category, err := s.categoryDao.GetById(id)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func (s CategoryService) GetById(id uint) (*dtos.CategoryOut, error) {
 func (s CategoryService) Create(categoryIn dtos.CategoryIn) (*dtos.CategoryOut, error) {
 	category := models.Category{Name: categoryIn.Name}
 
-	createdCategory, err := s.CategoryDao.Create(category)
+	createdCategory, err := s.categoryDao.Create(category)
 	if err != nil {
 		return nil, err
 	}
@@ -54,12 +54,12 @@ func (s CategoryService) Create(categoryIn dtos.CategoryIn) (*dtos.CategoryOut, 
 }
 
 func (s CategoryService) DeleteById(id uint) error {
-	category, err := s.CategoryDao.GetById(id)
+	category, err := s.categoryDao.GetById(id)
 	if err != nil {
 		return err
 	}
 
-	err = s.CategoryDao.Delete(*category)
+	err = s.categoryDao.Delete(*category)
 	if err != nil {
 		return err
 	}

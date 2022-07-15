@@ -6,17 +6,17 @@ import (
 )
 
 type CategoryDao struct {
-	Db *gorm.DB
+	db *gorm.DB
 }
 
 func NewCategoryDao(db *gorm.DB) *CategoryDao {
-	return &CategoryDao{Db: db}
+	return &CategoryDao{db: db}
 }
 
 func (d CategoryDao) GetByIds(ids []uint) ([]models.Category, error) {
 	var categories []models.Category
 
-	if err := d.Db.Find(&categories, "id in (?)", ids).Error; err != nil {
+	if err := d.db.Find(&categories, "id in (?)", ids).Error; err != nil {
 		return nil, err
 	}
 
@@ -26,7 +26,7 @@ func (d CategoryDao) GetByIds(ids []uint) ([]models.Category, error) {
 func (d CategoryDao) GetAll() ([]models.Category, error) {
 	var categories []models.Category
 
-	if err := d.Db.Find(&categories).Error; err != nil {
+	if err := d.db.Find(&categories).Error; err != nil {
 		return nil, err
 	}
 
@@ -36,7 +36,7 @@ func (d CategoryDao) GetAll() ([]models.Category, error) {
 func (d CategoryDao) GetById(id uint) (*models.Category, error) {
 	var category models.Category
 
-	if err := d.Db.First(&category, id).Error; err != nil {
+	if err := d.db.First(&category, id).Error; err != nil {
 		return nil, err
 	}
 
@@ -44,7 +44,7 @@ func (d CategoryDao) GetById(id uint) (*models.Category, error) {
 }
 
 func (d CategoryDao) Create(category models.Category) (*models.Category, error) {
-	if err := d.Db.Create(&category).Error; err != nil {
+	if err := d.db.Create(&category).Error; err != nil {
 		return nil, err
 	}
 
@@ -52,7 +52,7 @@ func (d CategoryDao) Create(category models.Category) (*models.Category, error) 
 }
 
 func (d CategoryDao) Delete(category models.Category) error {
-	if err := d.Db.Delete(&category).Error; err != nil {
+	if err := d.db.Delete(&category).Error; err != nil {
 		return err
 	}
 

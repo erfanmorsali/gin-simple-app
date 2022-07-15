@@ -8,12 +8,12 @@ import (
 	"gorm.io/gorm"
 )
 
-func RunUsersApi(engine *gin.Engine, db *gorm.DB) {
+func RunUsersApi(routerGroup *gin.RouterGroup, db *gorm.DB) {
 	dao := repositories.NewUserDao(db)
 	service := services.NewUserService(dao)
 	controller := controllers.NewUserController(service)
 
-	usersGroup := engine.Group("/users")
+	usersGroup := routerGroup.Group("/users")
 
 	usersGroup.GET("/", controller.GetAllUsers)
 	usersGroup.GET("/:id", controller.GetUserById)

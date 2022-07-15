@@ -9,15 +9,15 @@ import (
 )
 
 type CategoryController struct {
-	CategoryService interfaces.CategoryService
+	categoryService interfaces.CategoryService
 }
 
 func NewCategoryController(categoryService interfaces.CategoryService) *CategoryController {
-	return &CategoryController{CategoryService: categoryService}
+	return &CategoryController{categoryService: categoryService}
 }
 
 func (c CategoryController) GetAllCategories(context *gin.Context) {
-	categories, err := c.CategoryService.GetAll()
+	categories, err := c.categoryService.GetAll()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Internal Server Error",
@@ -39,7 +39,7 @@ func (c CategoryController) GetCategoryById(context *gin.Context) {
 		return
 	}
 
-	category, err := c.CategoryService.GetById(uint(id))
+	category, err := c.categoryService.GetById(uint(id))
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -62,7 +62,7 @@ func (c CategoryController) CreateCategory(context *gin.Context) {
 		return
 	}
 
-	category, err := c.CategoryService.Create(categoryIn)
+	category, err := c.categoryService.Create(categoryIn)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -84,7 +84,7 @@ func (c CategoryController) DeleteCategoryById(context *gin.Context) {
 		return
 	}
 
-	err = c.CategoryService.DeleteById(uint(id))
+	err = c.categoryService.DeleteById(uint(id))
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),

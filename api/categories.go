@@ -8,12 +8,12 @@ import (
 	"gorm.io/gorm"
 )
 
-func RunCategoriesApi(engine *gin.Engine, db *gorm.DB) {
+func RunCategoriesApi(routerGroup *gin.RouterGroup, db *gorm.DB) {
 	dao := repositories.NewCategoryDao(db)
 	service := services.NewCategoryService(dao)
 	controller := controllers.NewCategoryController(service)
 
-	categoryGroup := engine.Group("/categories")
+	categoryGroup := routerGroup.Group("/categories")
 
 	categoryGroup.GET("/", controller.GetAllCategories)
 	categoryGroup.GET("/:id", controller.GetCategoryById)

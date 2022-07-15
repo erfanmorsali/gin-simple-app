@@ -3,19 +3,29 @@ package main
 import (
 	"github.com/erfanmorsali/gin-simple-app.git/api"
 	"github.com/erfanmorsali/gin-simple-app.git/database"
+	"github.com/erfanmorsali/gin-simple-app.git/middlewares"
 	"github.com/gin-gonic/gin"
 	"log"
 )
 
 func main() {
-	engine := gin.Default()
 
 	db, err := database.ConnectToDb()
 	if err != nil {
 		return
 	}
 
-	api.RunAllApis(engine, db)
+	engine := gin.Default()
+	engine.Use()
+
+	apiGroup := engine.Group("/api")
+	adminGroup := apiGroup.Group("/admin")
+	adminGroup.Use(middlewares.Authentication())
+
+	publicGroup := apiGroup.Group("/pub")
+
+	api.RunAdminApis(adminGroup, db)
+	api.RunPublicApis(publicGroup, db)
 
 	log.Fatalln(engine.Run(":8080"))
 

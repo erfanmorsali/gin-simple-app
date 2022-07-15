@@ -8,19 +8,19 @@ import (
 )
 
 type PostService struct {
-	PostDao     interfaces.PostDao
-	UserDao     userInterfaces.UserDao
-	CategoryDao interfaces.CategoryDao
+	postDao     interfaces.PostDao
+	userDao     userInterfaces.UserDao
+	categoryDao interfaces.CategoryDao
 }
 
 func NewPostService(dao interfaces.PostDao, userDao userInterfaces.UserDao, categoryDao interfaces.CategoryDao) *PostService {
-	return &PostService{PostDao: dao, UserDao: userDao, CategoryDao: categoryDao}
+	return &PostService{postDao: dao, userDao: userDao, categoryDao: categoryDao}
 }
 
 func (p PostService) GetAll() ([]dtos.PostOut, error) {
 	var result []dtos.PostOut
 
-	posts, err := p.PostDao.GetAll()
+	posts, err := p.postDao.GetAll()
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ func (p PostService) GetAll() ([]dtos.PostOut, error) {
 }
 
 func (p PostService) GetById(id uint) (*dtos.PostOut, error) {
-	post, err := p.PostDao.GetById(id)
+	post, err := p.postDao.GetById(id)
 	if err != nil {
 		return nil, err
 	}
@@ -45,21 +45,21 @@ func (p PostService) GetById(id uint) (*dtos.PostOut, error) {
 }
 
 func (p PostService) Create(postIn dtos.PostIn) (*dtos.PostOut, error) {
-	user, err := p.UserDao.GetById(postIn.UserID)
+	user, err := p.userDao.GetById(postIn.UserID)
 	if err != nil {
 		return nil, err
 	}
 
 	var categories []models.Category
 	if postIn.CategoryIDS != nil && len(postIn.CategoryIDS) >= 1 {
-		categories, err = p.CategoryDao.GetByIds(postIn.CategoryIDS)
+		categories, err = p.categoryDao.GetByIds(postIn.CategoryIDS)
 		if err != nil {
 			return nil, err
 		}
 	}
 
 	post := models.Post{User: *user, Title: postIn.Title, Description: postIn.Description, Categories: categories}
-	createdPost, err := p.PostDao.Create(post)
+	createdPost, err := p.postDao.Create(post)
 	if err != nil {
 		return nil, err
 	}
@@ -69,12 +69,12 @@ func (p PostService) Create(postIn dtos.PostIn) (*dtos.PostOut, error) {
 }
 
 func (p PostService) DeleteById(id uint) error {
-	post, err := p.PostDao.GetById(id)
+	post, err := p.postDao.GetById(id)
 	if err != nil {
 		return err
 	}
 
-	err = p.PostDao.Delete(*post)
+	err = p.postDao.Delete(*post)
 	if err != nil {
 		return err
 	}
