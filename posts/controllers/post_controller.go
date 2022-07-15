@@ -19,8 +19,8 @@ func NewPostController(service interfaces.PostService) *PostController {
 func (c PostController) GetAllPosts(context *gin.Context) {
 	posts, err := c.PostService.GetAll()
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
+		context.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Internal Server Error",
 		})
 		return
 	}

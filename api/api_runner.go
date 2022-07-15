@@ -8,4 +8,5 @@ import (
 func RunAllApis(engine *gin.Engine, db *gorm.DB) {
 	RunUsersApi(engine, db)
 	RunPostsApi(engine, db)
+	RunCategoriesApi(engine, db)
 }
