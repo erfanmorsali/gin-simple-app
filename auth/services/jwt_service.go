@@ -3,8 +3,8 @@ package services
 import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/erfanmorsali/gin-simple-app.git/auth/dtos"
-	"github.com/erfanmorsali/gin-simple-app.git/auth/interfaces"
+	"github.com/erfanmorsali/gin-simple-app/auth/dtos"
+	"github.com/erfanmorsali/gin-simple-app/auth/interfaces"
 	"time"
 )
 

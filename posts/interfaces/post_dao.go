@@ -1,6 +1,6 @@
 package interfaces
 
-import "github.com/erfanmorsali/gin-simple-app.git/database/models"
+import "github.com/erfanmorsali/gin-simple-app/database/models"
 
 type PostDao interface {
 	GetAll() ([]*models.Post, error)

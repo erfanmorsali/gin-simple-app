@@ -1,6 +1,6 @@
 package interfaces
 
-import "github.com/erfanmorsali/gin-simple-app.git/users/dtos"
+import "github.com/erfanmorsali/gin-simple-app/users/dtos"
 
 type UserService interface {
 	GetAll() ([]dtos.UserOut, error)

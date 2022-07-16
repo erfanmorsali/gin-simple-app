@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/posts/controllers"
-	"github.com/erfanmorsali/gin-simple-app.git/posts/repositories"
-	"github.com/erfanmorsali/gin-simple-app.git/posts/services"
+	"github.com/erfanmorsali/gin-simple-app/posts/controllers"
+	"github.com/erfanmorsali/gin-simple-app/posts/repositories"
+	"github.com/erfanmorsali/gin-simple-app/posts/services"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )

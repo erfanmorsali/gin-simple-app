@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/middlewares"
+	"github.com/erfanmorsali/gin-simple-app/middlewares"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )

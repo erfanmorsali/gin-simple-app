@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/database/models"
-	"github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
+	"github.com/erfanmorsali/gin-simple-app/database/models"
+	"github.com/erfanmorsali/gin-simple-app/users/interfaces"
 	"gorm.io/gorm"
 )
 

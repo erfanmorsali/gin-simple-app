@@ -1,7 +1,7 @@
 package dtos
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/database/models"
+	"github.com/erfanmorsali/gin-simple-app/database/models"
 )
 
 type UserOut struct {

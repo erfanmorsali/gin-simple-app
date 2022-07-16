@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"github.com/erfanmorsali/gin-simple-app.git/auth/services"
+	"github.com/erfanmorsali/gin-simple-app/auth/services"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

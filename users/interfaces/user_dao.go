@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/database/models"
+	"github.com/erfanmorsali/gin-simple-app/database/models"
 )
 
 type UserDao interface {

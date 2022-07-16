@@ -1,6 +1,6 @@
 package interfaces
 
-import "github.com/erfanmorsali/gin-simple-app.git/auth/dtos"
+import "github.com/erfanmorsali/gin-simple-app/auth/dtos"
 
 type AuthService interface {
 	Login(email string, password string) bool

@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/posts/dtos"
+	"github.com/erfanmorsali/gin-simple-app/posts/dtos"
 )
 
 type CategoryService interface {

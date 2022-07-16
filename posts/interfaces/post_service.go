@@ -1,6 +1,6 @@
 package interfaces
 
-import "github.com/erfanmorsali/gin-simple-app.git/posts/dtos"
+import "github.com/erfanmorsali/gin-simple-app/posts/dtos"
 
 type PostService interface {
 	GetById(id uint) (*dtos.PostOut, error)

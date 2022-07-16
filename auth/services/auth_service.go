@@ -1,10 +1,10 @@
 package services
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/auth/dtos"
-	authInterfaces "github.com/erfanmorsali/gin-simple-app.git/auth/interfaces"
-	"github.com/erfanmorsali/gin-simple-app.git/database/models"
-	"github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
+	"github.com/erfanmorsali/gin-simple-app/auth/dtos"
+	authInterfaces "github.com/erfanmorsali/gin-simple-app/auth/interfaces"
+	"github.com/erfanmorsali/gin-simple-app/database/models"
+	"github.com/erfanmorsali/gin-simple-app/users/interfaces"
 	"golang.org/x/crypto/bcrypt"
 )
 

@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/users/dtos"
-	"github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
+	"github.com/erfanmorsali/gin-simple-app/users/dtos"
+	"github.com/erfanmorsali/gin-simple-app/users/interfaces"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/erfanmorsali/gin-simple-app.git/api"
-	"github.com/erfanmorsali/gin-simple-app.git/database"
+	"github.com/erfanmorsali/gin-simple-app/api"
+	"github.com/erfanmorsali/gin-simple-app/database"
 	"github.com/gin-gonic/gin"
 	"log"
 )

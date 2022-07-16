@@ -3,10 +3,10 @@ package services
 import (
 	"errors"
 	"fmt"
-	"github.com/erfanmorsali/gin-simple-app.git/database/models"
-	"github.com/erfanmorsali/gin-simple-app.git/posts/dtos"
-	"github.com/erfanmorsali/gin-simple-app.git/posts/interfaces"
-	userInterfaces "github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
+	"github.com/erfanmorsali/gin-simple-app/database/models"
+	"github.com/erfanmorsali/gin-simple-app/posts/dtos"
+	"github.com/erfanmorsali/gin-simple-app/posts/interfaces"
+	userInterfaces "github.com/erfanmorsali/gin-simple-app/users/interfaces"
 	"gorm.io/gorm"
 )
 
