@@ -16,11 +16,10 @@ func main() {
 	}
 
 	engine := gin.Default()
-	engine.Use()
 
 	apiGroup := engine.Group("/api")
 	adminGroup := apiGroup.Group("/admin")
-	adminGroup.Use(middlewares.Authentication())
+	adminGroup.Use(middlewares.JwtAuthenticationMiddleware())
 
 	publicGroup := apiGroup.Group("/pub")
 

@@ -8,20 +8,20 @@ import (
 	"strconv"
 )
 
-type UserController struct {
+type userController struct {
 	userService interfaces.UserService
 }
 
-func NewUserController(userService interfaces.UserService) *UserController {
-	return &UserController{userService: userService}
+func NewUserController(userService interfaces.UserService) *userController {
+	return &userController{userService: userService}
 }
 
-func (c UserController) GetAllUsers(context *gin.Context) {
+func (c userController) GetAllUsers(context *gin.Context) {
 	context.JSON(http.StatusOK, c.userService.GetAll())
 	return
 }
 
-func (c UserController) CreateUser(context *gin.Context) {
+func (c userController) CreateUser(context *gin.Context) {
 	var userIn dtos.UserIn
 
 	err := context.ShouldBindJSON(&userIn)
@@ -44,7 +44,7 @@ func (c UserController) CreateUser(context *gin.Context) {
 	return
 }
 
-func (c UserController) GetUserById(context *gin.Context) {
+func (c userController) GetUserById(context *gin.Context) {
 	pathId := context.Param("id")
 	id, err := strconv.Atoi(pathId)
 	if err != nil {
@@ -66,7 +66,7 @@ func (c UserController) GetUserById(context *gin.Context) {
 	return
 }
 
-func (c UserController) DeleteUserById(context *gin.Context) {
+func (c userController) DeleteUserById(context *gin.Context) {
 	pathId := context.Param("id")
 	id, err := strconv.Atoi(pathId)
 	if err != nil {

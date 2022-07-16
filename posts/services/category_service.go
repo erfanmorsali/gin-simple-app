@@ -6,15 +6,15 @@ import (
 	"github.com/erfanmorsali/gin-simple-app.git/posts/interfaces"
 )
 
-type CategoryService struct {
+type categoryService struct {
 	categoryDao interfaces.CategoryDao
 }
 
-func NewCategoryService(categoryDao interfaces.CategoryDao) *CategoryService {
-	return &CategoryService{categoryDao: categoryDao}
+func NewCategoryService(categoryDao interfaces.CategoryDao) *categoryService {
+	return &categoryService{categoryDao: categoryDao}
 }
 
-func (s CategoryService) GetAll() ([]dtos.CategoryOut, error) {
+func (s categoryService) GetAll() ([]dtos.CategoryOut, error) {
 	categories, err := s.categoryDao.GetAll()
 	if err != nil {
 		return nil, err
@@ -30,7 +30,7 @@ func (s CategoryService) GetAll() ([]dtos.CategoryOut, error) {
 	return result, nil
 }
 
-func (s CategoryService) GetById(id uint) (*dtos.CategoryOut, error) {
+func (s categoryService) GetById(id uint) (*dtos.CategoryOut, error) {
 	category, err := s.categoryDao.GetById(id)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func (s CategoryService) GetById(id uint) (*dtos.CategoryOut, error) {
 	return &result, nil
 }
 
-func (s CategoryService) Create(categoryIn dtos.CategoryIn) (*dtos.CategoryOut, error) {
+func (s categoryService) Create(categoryIn dtos.CategoryIn) (*dtos.CategoryOut, error) {
 	category := models.Category{Name: categoryIn.Name}
 
 	createdCategory, err := s.categoryDao.Create(category)
@@ -53,7 +53,7 @@ func (s CategoryService) Create(categoryIn dtos.CategoryIn) (*dtos.CategoryOut, 
 	return &categoryOut, nil
 }
 
-func (s CategoryService) DeleteById(id uint) error {
+func (s categoryService) DeleteById(id uint) error {
 	category, err := s.categoryDao.GetById(id)
 	if err != nil {
 		return err

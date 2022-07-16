@@ -8,15 +8,15 @@ import (
 	"strconv"
 )
 
-type PostController struct {
+type postController struct {
 	postService interfaces.PostService
 }
 
-func NewPostController(service interfaces.PostService) *PostController {
-	return &PostController{postService: service}
+func NewPostController(service interfaces.PostService) *postController {
+	return &postController{postService: service}
 }
 
-func (c PostController) GetAllPosts(context *gin.Context) {
+func (c postController) GetAllPosts(context *gin.Context) {
 	posts, err := c.postService.GetAll()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
@@ -29,7 +29,7 @@ func (c PostController) GetAllPosts(context *gin.Context) {
 	return
 }
 
-func (c PostController) GetPostById(context *gin.Context) {
+func (c postController) GetPostById(context *gin.Context) {
 	param := context.Param("id")
 	id, err := strconv.Atoi(param)
 	if err != nil {
@@ -51,7 +51,7 @@ func (c PostController) GetPostById(context *gin.Context) {
 	return
 }
 
-func (c PostController) CreatePost(context *gin.Context) {
+func (c postController) CreatePost(context *gin.Context) {
 	var postIn dtos.PostIn
 	err := context.ShouldBindJSON(&postIn)
 	if err != nil {
@@ -73,7 +73,7 @@ func (c PostController) CreatePost(context *gin.Context) {
 	return
 }
 
-func (c PostController) DeletePostById(context *gin.Context) {
+func (c postController) DeletePostById(context *gin.Context) {
 	param := context.Param("id")
 	id, err := strconv.Atoi(param)
 	if err != nil {

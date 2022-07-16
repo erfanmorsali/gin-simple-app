@@ -7,19 +7,19 @@ import (
 	"net/http"
 )
 
-type AuthController struct {
+type authController struct {
 	authService interfaces.AuthService
 	jwtService  interfaces.JwtService
 }
 
-func NewAuthController(authService interfaces.AuthService, jwtService interfaces.JwtService) *AuthController {
-	return &AuthController{
+func NewAuthController(authService interfaces.AuthService, jwtService interfaces.JwtService) *authController {
+	return &authController{
 		authService: authService,
 		jwtService:  jwtService,
 	}
 }
 
-func (c AuthController) Login(context *gin.Context) {
+func (c authController) Login(context *gin.Context) {
 	var loginInput dtos.LoginIn
 
 	err := context.ShouldBindJSON(&loginInput)
@@ -45,7 +45,7 @@ func (c AuthController) Login(context *gin.Context) {
 	return
 }
 
-func (c AuthController) Register(context *gin.Context) {
+func (c authController) Register(context *gin.Context) {
 	var registerInput dtos.RegisterIn
 	err := context.ShouldBindJSON(&registerInput)
 	if err != nil {

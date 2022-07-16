@@ -7,17 +7,17 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type AuthService struct {
+type authService struct {
 	userDao interfaces.UserDao
 }
 
-func NewAuthService(userDao interfaces.UserDao) *AuthService {
-	return &AuthService{
+func NewAuthService(userDao interfaces.UserDao) *authService {
+	return &authService{
 		userDao: userDao,
 	}
 }
 
-func (s AuthService) Login(email string, password string) bool {
+func (s authService) Login(email string, password string) bool {
 	user, err := s.userDao.GetUserByEmail(email)
 	if err != nil {
 		return false
@@ -30,7 +30,7 @@ func (s AuthService) Login(email string, password string) bool {
 	return true
 }
 
-func (s AuthService) Register(registerInput dtos.RegisterIn) (*dtos.RegisterOut, error) {
+func (s authService) Register(registerInput dtos.RegisterIn) (*dtos.RegisterOut, error) {
 	password, err := s.HashPassword(registerInput.Password)
 	if err != nil {
 		return nil, err
@@ -45,12 +45,12 @@ func (s AuthService) Register(registerInput dtos.RegisterIn) (*dtos.RegisterOut,
 	return &dtos.RegisterOut{Email: createdUser.Email, Username: createdUser.Username, ID: createdUser.ID}, nil
 }
 
-func (s AuthService) HashPassword(password string) (string, error) {
+func (s authService) HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	return string(bytes), err
 }
 
-func (s AuthService) CheckPasswordHash(password, hash string) bool {
+func (s authService) CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }

@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func Authentication() gin.HandlerFunc {
+func JwtAuthenticationMiddleware() gin.HandlerFunc {
 	return func(context *gin.Context) {
 
 		const BEARER_SCHEMA = "Bearer "

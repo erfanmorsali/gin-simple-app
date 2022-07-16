@@ -7,13 +7,13 @@ import (
 	"time"
 )
 
-type JwtService struct {
+type jwtService struct {
 	secretKey string
 	issuer    string
 }
 
-func NewJwtService() *JwtService {
-	return &JwtService{
+func NewJwtService() *jwtService {
+	return &jwtService{
 		secretKey: getSecretKey(),
 		issuer:    "test_issuer",
 	}
@@ -24,7 +24,7 @@ func getSecretKey() string {
 	return secret
 }
 
-func (service *JwtService) GenerateToken(email string, isUser bool) string {
+func (service *jwtService) GenerateToken(email string, isUser bool) string {
 	claims := &dtos.CustomClaim{
 		Email: email,
 		User:  isUser,
@@ -44,7 +44,7 @@ func (service *JwtService) GenerateToken(email string, isUser bool) string {
 	return t
 }
 
-func (service *JwtService) ValidateToken(encodedToken string) (*jwt.Token, error) {
+func (service *jwtService) ValidateToken(encodedToken string) (*jwt.Token, error) {
 	return jwt.Parse(encodedToken, func(token *jwt.Token) (interface{}, error) {
 		if _, isvalid := token.Method.(*jwt.SigningMethodHMAC); !isvalid {
 			return nil, fmt.Errorf("Invalid token", token.Header["alg"])

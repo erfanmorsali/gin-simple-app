@@ -7,17 +7,17 @@ import (
 	userInterfaces "github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
 )
 
-type PostService struct {
+type postService struct {
 	postDao     interfaces.PostDao
 	userDao     userInterfaces.UserDao
 	categoryDao interfaces.CategoryDao
 }
 
-func NewPostService(dao interfaces.PostDao, userDao userInterfaces.UserDao, categoryDao interfaces.CategoryDao) *PostService {
-	return &PostService{postDao: dao, userDao: userDao, categoryDao: categoryDao}
+func NewPostService(dao interfaces.PostDao, userDao userInterfaces.UserDao, categoryDao interfaces.CategoryDao) *postService {
+	return &postService{postDao: dao, userDao: userDao, categoryDao: categoryDao}
 }
 
-func (p PostService) GetAll() ([]dtos.PostOut, error) {
+func (p postService) GetAll() ([]dtos.PostOut, error) {
 	var result []dtos.PostOut
 
 	posts, err := p.postDao.GetAll()
@@ -33,7 +33,7 @@ func (p PostService) GetAll() ([]dtos.PostOut, error) {
 	return result, nil
 }
 
-func (p PostService) GetById(id uint) (*dtos.PostOut, error) {
+func (p postService) GetById(id uint) (*dtos.PostOut, error) {
 	post, err := p.postDao.GetById(id)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (p PostService) GetById(id uint) (*dtos.PostOut, error) {
 
 }
 
-func (p PostService) Create(postIn dtos.PostIn) (*dtos.PostOut, error) {
+func (p postService) Create(postIn dtos.PostIn) (*dtos.PostOut, error) {
 	user, err := p.userDao.GetById(postIn.UserID)
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ func (p PostService) Create(postIn dtos.PostIn) (*dtos.PostOut, error) {
 	return &postOut, nil
 }
 
-func (p PostService) DeleteById(id uint) error {
+func (p postService) DeleteById(id uint) error {
 	post, err := p.postDao.GetById(id)
 	if err != nil {
 		return err

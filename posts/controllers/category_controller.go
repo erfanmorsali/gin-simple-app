@@ -8,15 +8,15 @@ import (
 	"strconv"
 )
 
-type CategoryController struct {
+type categoryController struct {
 	categoryService interfaces.CategoryService
 }
 
-func NewCategoryController(categoryService interfaces.CategoryService) *CategoryController {
-	return &CategoryController{categoryService: categoryService}
+func NewCategoryController(categoryService interfaces.CategoryService) *categoryController {
+	return &categoryController{categoryService: categoryService}
 }
 
-func (c CategoryController) GetAllCategories(context *gin.Context) {
+func (c categoryController) GetAllCategories(context *gin.Context) {
 	categories, err := c.categoryService.GetAll()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
@@ -29,7 +29,7 @@ func (c CategoryController) GetAllCategories(context *gin.Context) {
 	return
 }
 
-func (c CategoryController) GetCategoryById(context *gin.Context) {
+func (c categoryController) GetCategoryById(context *gin.Context) {
 	param := context.Param("id")
 	id, err := strconv.Atoi(param)
 	if err != nil {
@@ -51,7 +51,7 @@ func (c CategoryController) GetCategoryById(context *gin.Context) {
 	return
 }
 
-func (c CategoryController) CreateCategory(context *gin.Context) {
+func (c categoryController) CreateCategory(context *gin.Context) {
 	var categoryIn dtos.CategoryIn
 
 	err := context.ShouldBindJSON(&categoryIn)
@@ -74,7 +74,7 @@ func (c CategoryController) CreateCategory(context *gin.Context) {
 	return
 }
 
-func (c CategoryController) DeleteCategoryById(context *gin.Context) {
+func (c categoryController) DeleteCategoryById(context *gin.Context) {
 	param := context.Param("id")
 	id, err := strconv.Atoi(param)
 	if err != nil {
