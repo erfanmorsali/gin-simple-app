@@ -1,9 +1,12 @@
 package services
 
 import (
+	"errors"
+	"fmt"
 	"github.com/erfanmorsali/gin-simple-app.git/database/models"
 	"github.com/erfanmorsali/gin-simple-app.git/posts/dtos"
 	"github.com/erfanmorsali/gin-simple-app.git/posts/interfaces"
+	"gorm.io/gorm"
 )
 
 type categoryService struct {
@@ -33,6 +36,10 @@ func (s categoryService) GetAll() ([]dtos.CategoryOut, error) {
 func (s categoryService) GetById(id uint) (*dtos.CategoryOut, error) {
 	category, err := s.categoryDao.GetById(id)
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			errorMessage := fmt.Sprintf("record with id : %d not found", id)
+			return nil, errors.New(errorMessage)
+		}
 		return nil, err
 	}
 
@@ -56,6 +63,10 @@ func (s categoryService) Create(categoryIn dtos.CategoryIn) (*dtos.CategoryOut, 
 func (s categoryService) DeleteById(id uint) error {
 	category, err := s.categoryDao.GetById(id)
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			errorMessage := fmt.Sprintf("record with id : %d not found", id)
+			return errors.New(errorMessage)
+		}
 		return err
 	}
 

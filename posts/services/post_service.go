@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 	"github.com/erfanmorsali/gin-simple-app.git/database/models"
 	"github.com/erfanmorsali/gin-simple-app.git/posts/dtos"
 	"github.com/erfanmorsali/gin-simple-app.git/posts/interfaces"
@@ -39,7 +40,8 @@ func (p postService) GetById(id uint) (*dtos.PostOut, error) {
 	post, err := p.postDao.GetById(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-
+			errorMessage := fmt.Sprintf("record with id : %d not found", id)
+			return nil, errors.New(errorMessage)
 		}
 		return nil, err
 	}
@@ -76,6 +78,10 @@ func (p postService) Create(postIn dtos.PostIn) (*dtos.PostOut, error) {
 func (p postService) DeleteById(id uint) error {
 	post, err := p.postDao.GetById(id)
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			errorMessage := fmt.Sprintf("record with id : %d not found", id)
+			return errors.New(errorMessage)
+		}
 		return err
 	}
 
