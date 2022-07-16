@@ -2,6 +2,7 @@ package services
 
 import (
 	"github.com/erfanmorsali/gin-simple-app.git/auth/dtos"
+	authInterfaces "github.com/erfanmorsali/gin-simple-app.git/auth/interfaces"
 	"github.com/erfanmorsali/gin-simple-app.git/database/models"
 	"github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
 	"golang.org/x/crypto/bcrypt"
@@ -11,7 +12,7 @@ type authService struct {
 	userDao interfaces.UserDao
 }
 
-func NewAuthService(userDao interfaces.UserDao) *authService {
+func NewAuthService(userDao interfaces.UserDao) authInterfaces.AuthService {
 	return &authService{
 		userDao: userDao,
 	}

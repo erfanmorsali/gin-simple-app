@@ -13,7 +13,7 @@ type postService struct {
 	categoryDao interfaces.CategoryDao
 }
 
-func NewPostService(dao interfaces.PostDao, userDao userInterfaces.UserDao, categoryDao interfaces.CategoryDao) *postService {
+func NewPostService(dao interfaces.PostDao, userDao userInterfaces.UserDao, categoryDao interfaces.CategoryDao) interfaces.PostService {
 	return &postService{postDao: dao, userDao: userDao, categoryDao: categoryDao}
 }
 

@@ -12,7 +12,7 @@ type postController struct {
 	postService interfaces.PostService
 }
 
-func NewPostController(service interfaces.PostService) *postController {
+func NewPostController(service interfaces.PostService) interfaces.PostController {
 	return &postController{postService: service}
 }
 

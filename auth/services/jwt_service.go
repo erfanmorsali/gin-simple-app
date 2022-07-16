@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/erfanmorsali/gin-simple-app.git/auth/dtos"
+	"github.com/erfanmorsali/gin-simple-app.git/auth/interfaces"
 	"time"
 )
 
@@ -12,7 +13,7 @@ type jwtService struct {
 	issuer    string
 }
 
-func NewJwtService() *jwtService {
+func NewJwtService() interfaces.JwtService {
 	return &jwtService{
 		secretKey: getSecretKey(),
 		issuer:    "test_issuer",

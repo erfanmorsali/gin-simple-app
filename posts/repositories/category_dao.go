@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"github.com/erfanmorsali/gin-simple-app.git/database/models"
+	"github.com/erfanmorsali/gin-simple-app.git/posts/interfaces"
 	"gorm.io/gorm"
 )
 
@@ -9,7 +10,7 @@ type categoryDao struct {
 	db *gorm.DB
 }
 
-func NewCategoryDao(db *gorm.DB) *categoryDao {
+func NewCategoryDao(db *gorm.DB) interfaces.CategoryDao {
 	return &categoryDao{db: db}
 }
 

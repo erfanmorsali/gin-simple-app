@@ -10,7 +10,7 @@ type categoryService struct {
 	categoryDao interfaces.CategoryDao
 }
 
-func NewCategoryService(categoryDao interfaces.CategoryDao) *categoryService {
+func NewCategoryService(categoryDao interfaces.CategoryDao) interfaces.CategoryService {
 	return &categoryService{categoryDao: categoryDao}
 }
 

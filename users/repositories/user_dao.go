@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"github.com/erfanmorsali/gin-simple-app.git/database/models"
+	"github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
 	"gorm.io/gorm"
 )
 
@@ -9,7 +10,7 @@ type userDao struct {
 	db *gorm.DB
 }
 
-func NewUserDao(db *gorm.DB) *userDao {
+func NewUserDao(db *gorm.DB) interfaces.UserDao {
 	return &userDao{db: db}
 }
 

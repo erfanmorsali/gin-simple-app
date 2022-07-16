@@ -10,7 +10,7 @@ type userService struct {
 	userDao interfaces.UserDao
 }
 
-func NewUserService(userDao interfaces.UserDao) *userService {
+func NewUserService(userDao interfaces.UserDao) interfaces.UserService {
 	return &userService{userDao: userDao}
 }
 

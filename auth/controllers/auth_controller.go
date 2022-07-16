@@ -12,7 +12,7 @@ type authController struct {
 	jwtService  interfaces.JwtService
 }
 
-func NewAuthController(authService interfaces.AuthService, jwtService interfaces.JwtService) *authController {
+func NewAuthController(authService interfaces.AuthService, jwtService interfaces.JwtService) interfaces.AuthController {
 	return &authController{
 		authService: authService,
 		jwtService:  jwtService,

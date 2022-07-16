@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"github.com/erfanmorsali/gin-simple-app.git/database/models"
+	"github.com/erfanmorsali/gin-simple-app.git/posts/interfaces"
 	"gorm.io/gorm"
 )
 
@@ -9,7 +10,7 @@ type postDao struct {
 	db *gorm.DB
 }
 
-func NewPostDao(db *gorm.DB) *postDao {
+func NewPostDao(db *gorm.DB) interfaces.PostDao {
 	return &postDao{db: db}
 }
 
