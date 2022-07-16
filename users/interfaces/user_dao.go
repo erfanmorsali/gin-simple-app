@@ -5,7 +5,7 @@ import (
 )
 
 type UserDao interface {
-	GetAll() []models.User
+	GetAll() ([]models.User, error)
 	Create(user *models.User) (*models.User, error)
 	GetById(id uint) (*models.User, error)
 	GetUserByEmail(email string) (*models.User, error)

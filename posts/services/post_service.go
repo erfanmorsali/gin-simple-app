@@ -1,10 +1,12 @@
 package services
 
 import (
+	"errors"
 	"github.com/erfanmorsali/gin-simple-app.git/database/models"
 	"github.com/erfanmorsali/gin-simple-app.git/posts/dtos"
 	"github.com/erfanmorsali/gin-simple-app.git/posts/interfaces"
 	userInterfaces "github.com/erfanmorsali/gin-simple-app.git/users/interfaces"
+	"gorm.io/gorm"
 )
 
 type postService struct {
@@ -36,6 +38,9 @@ func (p postService) GetAll() ([]dtos.PostOut, error) {
 func (p postService) GetById(id uint) (*dtos.PostOut, error) {
 	post, err := p.postDao.GetById(id)
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+
+		}
 		return nil, err
 	}
 

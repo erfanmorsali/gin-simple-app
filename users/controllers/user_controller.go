@@ -17,7 +17,15 @@ func NewUserController(userService interfaces.UserService) interfaces.UserContro
 }
 
 func (c userController) GetAllUsers(context *gin.Context) {
-	context.JSON(http.StatusOK, c.userService.GetAll())
+	outs, err := c.userService.GetAll()
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	context.JSON(http.StatusOK, outs)
 	return
 }
 
@@ -71,7 +79,7 @@ func (c userController) DeleteUserById(context *gin.Context) {
 	id, err := strconv.Atoi(pathId)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
+			"error": "invalid input for id",
 		})
 		return
 	}

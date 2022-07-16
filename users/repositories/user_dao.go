@@ -14,12 +14,14 @@ func NewUserDao(db *gorm.DB) interfaces.UserDao {
 	return &userDao{db: db}
 }
 
-func (d userDao) GetAll() []models.User {
+func (d userDao) GetAll() ([]models.User, error) {
 
 	var users []models.User
-	d.db.Preload("Posts").Find(&users)
+	if err := d.db.Preload("Posts").Find(&users).Error; err != nil {
+		return nil, err
+	}
 
-	return users
+	return users, nil
 }
 
 func (d userDao) Create(user *models.User) (*models.User, error) {
