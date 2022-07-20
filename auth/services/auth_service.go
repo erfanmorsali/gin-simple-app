@@ -24,11 +24,8 @@ func (s authService) Login(email string, password string) bool {
 		return false
 	}
 
-	if !s.CheckPasswordHash(password, user.Password) {
-		return false
-	}
+	return s.CheckPasswordHash(password, user.Password)
 
-	return true
 }
 
 func (s authService) Register(registerInput dtos.RegisterIn) (*dtos.RegisterOut, error) {
